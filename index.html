@@ -1,9 +1,9 @@
-
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <title>CampusHub Event Portal</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
 
 <style>
 
@@ -14,7 +14,7 @@ box-sizing:border-box;
 font-family:Segoe UI;
 }
 
-/* LOGIN PAGE */
+/* LOGIN */
 
 #loginPage{
 height:100vh;
@@ -28,11 +28,9 @@ background:url("https://images.unsplash.com/photo-1523580846011-d3a5bc25702b") c
 background:rgba(255,255,255,0.2);
 backdrop-filter:blur(10px);
 padding:40px;
-width:320px;
 border-radius:15px;
-text-align:center;
 color:white;
-box-shadow:0 10px 30px rgba(0,0,0,0.4);
+text-align:center;
 }
 
 .login-box input{
@@ -40,20 +38,10 @@ width:100%;
 padding:10px;
 margin:10px 0;
 border:none;
-border-radius:8px;
+border-radius:6px;
 }
 
-button{
-padding:10px 18px;
-border:none;
-border-radius:8px;
-background:#ff7a18;
-color:white;
-cursor:pointer;
-font-weight:bold;
-}
-
-/* MAIN PAGE */
+/* MAIN */
 
 #mainPage{
 display:none;
@@ -61,29 +49,24 @@ min-height:100vh;
 background:linear-gradient(135deg,#667eea,#764ba2);
 }
 
-/* NAVBAR */
-
 .navbar{
 display:flex;
 justify-content:space-between;
-padding:18px 40px;
+padding:15px 40px;
 background:#4b4fa3;
 color:white;
 }
 
 .navbar a{
 margin-left:20px;
-color:white;
-text-decoration:none;
-font-weight:bold;
 cursor:pointer;
 }
 
 /* HERO */
 
 .hero{
-height:80vh;
-background:url("https://images.unsplash.com/photo-1519389950473-47ba0277781c") center/cover no-repeat;
+height:90vh;
+background:url("https://images.unsplash.com/photo-1503676260728-1c00da094a0b") center/cover no-repeat;
 display:flex;
 flex-direction:column;
 justify-content:center;
@@ -96,32 +79,25 @@ text-align:center;
 font-size:45px;
 }
 
-.hero p{
-font-size:20px;
-margin:15px 0;
+.hero button{
+margin-top:20px;
+font-size:18px;
 }
 
 /* EVENTS */
 
 .container{
-display:flex;
-flex-wrap:wrap;
-justify-content:center;
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+gap:20px;
 padding:30px;
 }
 
 .card{
 background:white;
-width:260px;
-margin:15px;
-border-radius:15px;
+border-radius:10px;
 overflow:hidden;
-box-shadow:0 10px 25px rgba(0,0,0,0.3);
-transition:0.3s;
-}
-
-.card:hover{
-transform:translateY(-10px);
+box-shadow:0 10px 20px rgba(0,0,0,0.3);
 }
 
 .card img{
@@ -132,22 +108,17 @@ object-fit:cover;
 
 .card-content{
 padding:15px;
-}
-
-.count{
-color:red;
-font-weight:bold;
+text-align:center;
 }
 
 /* CONTACT */
 
 .contact{
-max-width:600px;
+max-width:500px;
 margin:40px auto;
 background:white;
-padding:30px;
-border-radius:15px;
-box-shadow:0 10px 25px rgba(0,0,0,0.3);
+padding:25px;
+border-radius:10px;
 text-align:center;
 }
 
@@ -156,29 +127,51 @@ text-align:center;
 width:100%;
 padding:10px;
 margin:10px 0;
-border-radius:6px;
 border:1px solid #ccc;
 }
 
-/* REGISTER POPUP */
+/* BUTTON */
 
-#registerBox{
+button{
+padding:10px 18px;
+background:#ff7a18;
+border:none;
+color:white;
+border-radius:6px;
+cursor:pointer;
+}
+
+/* POPUP */
+
+#popup,#registerPopup{
 display:none;
 position:fixed;
+top:0;
+left:0;
+width:100%;
+height:100%;
+background:rgba(0,0,0,0.6);
+z-index:1000;
+}
+
+.popup-box{
+background:white;
+padding:30px;
+border-radius:10px;
+text-align:center;
+width:320px;
+
+position:absolute;
 top:50%;
 left:50%;
 transform:translate(-50%,-50%);
-background:white;
-padding:25px;
-border-radius:10px;
-box-shadow:0 10px 30px rgba(0,0,0,0.5);
-width:300px;
 }
 
-#registerBox input{
+.popup-box input{
 width:100%;
 padding:8px;
 margin:8px 0;
+border:1px solid #ccc;
 }
 
 /* SECTIONS */
@@ -189,7 +182,7 @@ display:none;
 
 footer{
 text-align:center;
-padding:20px;
+padding:15px;
 background:#4b4fa3;
 color:white;
 }
@@ -205,9 +198,9 @@ color:white;
 
 <div class="login-box">
 
-<h2>🎓 Student Login</h2>
+<h2>Student Login</h2>
 
-<input id="roll" placeholder="Student Roll No">
+<input id="roll" placeholder="Roll No">
 <input id="pass" type="password" placeholder="Password">
 
 <button onclick="login()">Login</button>
@@ -215,6 +208,7 @@ color:white;
 </div>
 
 </div>
+
 
 <!-- MAIN PAGE -->
 
@@ -226,11 +220,12 @@ color:white;
 
 <div>
 <a onclick="showPage('home')">Home</a>
-<a onclick="showPage('eventsPage')">Events</a>
-<a onclick="showPage('contactPage')">Contact</a>
+<a onclick="showPage('events')">Events</a>
+<a onclick="showPage('contact')">Contact</a>
 </div>
 
 </nav>
+
 
 <!-- HOME -->
 
@@ -239,35 +234,37 @@ color:white;
 <div class="hero">
 
 <h1>College Event Portal</h1>
-<p>Discover & Register for Campus Events</p>
+<p>Discover Amazing Campus Events</p>
 
-<button onclick="showPage('eventsPage')">Explore Events</button>
+<button onclick="showPage('events')">Explore Events</button>
+
+</div>
 
 </div>
 
-</div>
 
 <!-- EVENTS -->
 
-<div id="eventsPage" class="section">
+<div id="events" class="section">
 
-<div class="container" id="events"></div>
+<div class="container" id="eventContainer"></div>
 
 </div>
 
+
 <!-- CONTACT -->
 
-<div id="contactPage" class="section">
+<div id="contact" class="section">
 
 <div class="contact">
 
 <h2>Contact Us</h2>
 
-<input placeholder="Your Name">
-<input placeholder="Email">
-<textarea placeholder="Message"></textarea>
+<input id="name" placeholder="Name">
+<input id="email" placeholder="Email">
+<textarea id="msg" placeholder="Message"></textarea>
 
-<button>Send</button>
+<button onclick="sendMsg()">Send</button>
 
 </div>
 
@@ -279,84 +276,115 @@ color:white;
 
 </div>
 
-<!-- REGISTER FORM -->
 
-<div id="registerBox">
+<!-- CONTACT POPUP -->
+
+<div id="popup">
+
+<div class="popup-box">
+
+<h3>Message Sent Successfully ✅</h3>
+
+<br>
+
+<button onclick="closePopup()">OK</button>
+
+</div>
+
+</div>
+
+
+<!-- REGISTER POPUP -->
+
+<div id="registerPopup">
+
+<div class="popup-box">
 
 <h3>Event Registration</h3>
 
-<input id="rname" placeholder="Your Name">
-<input id="rroll" placeholder="Roll No">
-<input id="remail" placeholder="Email">
+<input id="studentName" placeholder="Your Name">
+<input id="studentRoll" placeholder="Roll No">
+<input id="studentBranch" placeholder="Branch">
 
-<button onclick="submitRegister()">Submit</button>
+<button onclick="submitRegistration()">Submit</button>
+
+<br><br>
+
+<button onclick="closeRegister()">Cancel</button>
 
 </div>
+
+</div>
+
 
 <script>
 
 let events=[
 
-{name:"Hackathon",date:"2026-04-10",venue:"Computer Lab",img:"https://picsum.photos/400/200?1"},
-{name:"Music Fest",date:"2026-04-15",venue:"Auditorium",img:"https://picsum.photos/400/200?2"},
-{name:"Dance Competition",date:"2026-04-18",venue:"Open Stage",img:"https://picsum.photos/400/200?3"},
-{name:"Cricket Tournament",date:"2026-04-20",venue:"Playground",img:"https://picsum.photos/400/200?4"},
-{name:"Coding Contest",date:"2026-04-22",venue:"Lab 2",img:"https://picsum.photos/400/200?5"},
-{name:"AI Workshop",date:"2026-04-24",venue:"Seminar Hall",img:"https://picsum.photos/400/200?6"},
-{name:"Startup Pitch",date:"2026-04-26",venue:"Conference Hall",img:"https://picsum.photos/400/200?7"},
-{name:"Photography Contest",date:"2026-04-27",venue:"Campus Park",img:"https://picsum.photos/400/200?8"},
-{name:"Chess Tournament",date:"2026-04-28",venue:"Indoor Stadium",img:"https://picsum.photos/400/200?9"},
-{name:"Drama Night",date:"2026-04-30",venue:"Main Stage",img:"https://picsum.photos/400/200?10"}
+{name:"Hackathon",img:"https://images.unsplash.com/photo-1518770660439-4636190af475"},
+{name:"Music Fest",img:"https://images.unsplash.com/photo-1507874457470-272b3c8d8ee2"},
+{name:"Dance Competition",img:"https://images.unsplash.com/photo-1504609813442-a8924e83f76e"},
+{name:"Cricket Tournament",img:"https://images.unsplash.com/photo-1540747913346-19e32dc3e97e"},
+{name:"Coding Contest",img:"https://images.unsplash.com/photo-1517694712202-14dd9538aa97"},
+{name:"Photography Contest",img:"https://aaft.com/blog/wp-content/uploads/2025/05/AdobeStock_150026021.jpeg"},
+{name:"Robotics Workshop",img:"https://s3-ap-south-1.amazonaws.com/ricedigitals3bucket/AUPortalContent/2023/07/25174434/efc290acf4d2f1573b4a87aa3999508b.png"},
+{name:"Startup Pitch",img:"https://images.unsplash.com/photo-1559136555-9303baea8ebd"},
+{name:"Art Exhibition",img:"https://images.unsplash.com/photo-1513364776144-60967b0f800f"},
+{name:"Gaming Tournament",img:"https://images.unsplash.com/photo-1511512578047-dfb367046420"},
+{name:"Debate Competition",img:"https://images.unsplash.com/photo-1551836022-d5d88e9218df"},
+{name:"AI Workshop",img:"https://images.unsplash.com/photo-1507149833265-60c372daea22"}
 
 ];
 
 function login(){
 
-let roll= document.getElementById("roll").value;
-let pass= document.getElementById("pass").value;
+let roll=document.getElementById("roll").value;
+let pass=document.getElementById("pass").value;
 
 if(roll && pass){
 
-loginPage.style.display="none";
-mainPage.style.display="block";
+document.getElementById("loginPage").style.display="none";
+document.getElementById("mainPage").style.display="block";
 
 showPage("home");
-show(events);
+loadEvents();
 
-}
-else{
-alert("Enter Roll No and Password");
+}else{
+
+alert("Enter Roll and Password");
+
 }
 
 }
 
 function showPage(page){
 
-document.querySelectorAll(".section").forEach(s=>s.style.display="none");
+document.querySelectorAll(".section").forEach(sec=>{
+sec.style.display="none";
+});
+
 document.getElementById(page).style.display="block";
 
 }
 
-function show(list){
+function loadEvents(){
 
-let container=document.getElementById("events");
+let container=document.getElementById("eventContainer");
+
 container.innerHTML="";
 
-list.forEach(e=>{
+events.forEach(e=>{
 
-let div=document.createElement("div");
-div.className="card";
+let card=document.createElement("div");
+card.className="card";
 
-div.innerHTML=`
+card.innerHTML=`
 
 <img src="${e.img}">
 
 <div class="card-content">
 
 <h3>${e.name}</h3>
-<p>Date: ${e.date}</p>
-<p>Venue: ${e.venue}</p>
-<p class="count">${countdown(e.date)}</p>
 
 <button onclick="openRegister()">Register</button>
 
@@ -364,7 +392,7 @@ div.innerHTML=`
 
 `;
 
-container.appendChild(div);
+container.appendChild(card);
 
 });
 
@@ -372,38 +400,57 @@ container.appendChild(div);
 
 function openRegister(){
 
-document.getElementById("registerBox").style.display="block";
+document.getElementById("registerPopup").style.display="block";
 
 }
 
-function submitRegister(){
+function closeRegister(){
 
-let name=rname.value;
-let roll=rroll.value;
-let email=remail.value;
-
-if(name && roll && email){
-
-alert("Registered Successfully!");
-document.getElementById("registerBox").style.display="none";
-
-}
-else{
-alert("Please fill all details");
-}
+document.getElementById("registerPopup").style.display="none";
 
 }
 
-function countdown(date){
+function submitRegistration(){
 
-let d=new Date(date);
-let now=new Date();
-let diff=d-now;
+let name=document.getElementById("studentName").value;
+let roll=document.getElementById("studentRoll").value;
+let branch=document.getElementById("studentBranch").value;
 
-let days=Math.ceil(diff/(1000*60*60*24));
+if(name && roll && branch){
 
-if(days>0) return days+" days left";
-else return "Started";
+alert("Registration Successful 🎉");
+
+closeRegister();
+
+}else{
+
+alert("Fill all details");
+
+}
+
+}
+
+function sendMsg(){
+
+let name=document.getElementById("name").value;
+let email=document.getElementById("email").value;
+let msg=document.getElementById("msg").value;
+
+if(name!=="" && email!=="" && msg!==""){
+
+document.getElementById("popup").style.display="block";
+
+}else{
+
+alert("Fill all fields");
+
+}
+
+}
+
+function closePopup(){
+
+document.getElementById("popup").style.display="none";
 
 }
 
